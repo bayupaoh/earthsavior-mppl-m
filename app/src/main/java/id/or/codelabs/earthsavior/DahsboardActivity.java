@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import id.or.codelabs.earthsavior.Fragment.HomeFragment;
+import id.or.codelabs.earthsavior.Fragment.ProfilFragment;
 
 public class DahsboardActivity extends AppCompatActivity {
     DrawerLayout drawer;
@@ -33,6 +34,7 @@ public class DahsboardActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,8 +46,8 @@ public class DahsboardActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(navItemSelect);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        HomeFragment home = new HomeFragment();
-        fragmentManager.beginTransaction().replace(R.id.container_body, home).commit();
+
+        fragmentManager.beginTransaction().replace(R.id.container_body, new HomeFragment()).commit();
 
     }
 
@@ -61,8 +63,10 @@ public class DahsboardActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction().replace(R.id.container_body, new HomeFragment()).commit();
                     return true;
                 case R.id.id_menu_chart :
+
                     return true;
                 case R.id.id_menu_profil :
+                    fragmentManager.beginTransaction().replace(R.id.container_body, new ProfilFragment()).commit();
                     return true;
                 case R.id.id_menu_setting:
                     return true;

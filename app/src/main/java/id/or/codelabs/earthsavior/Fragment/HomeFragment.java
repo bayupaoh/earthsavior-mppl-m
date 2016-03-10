@@ -38,11 +38,11 @@ import id.or.codelabs.earthsavior.R;
  */
 public class HomeFragment extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
     View parentView;
-RecyclerView recyclerView;
+    RecyclerView recyclerView;
     Context context;
     ArrayList<ModelHome> listHome = new ArrayList<>();
     FloatingActionButton fabMulai;
-    private GoogleApiClient mGoogleApiClient;
+    GoogleApiClient mGoogleApiClient;
     int PLACE_PICKER_REQUEST = 1;
 
     public HomeFragment() {
@@ -57,7 +57,14 @@ RecyclerView recyclerView;
         parentView = inflater.inflate(R.layout.fragment_home, container, false);
         setUpDataDummy();
         recyclerView = (RecyclerView) parentView.findViewById(R.id.recyclerview_home);
-        fabMulai = (FloatingActionButton) parentView.findViewById(R.id.fab_add);
+
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(parentView.getContext())
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .build();
+
+        fabMulai = (FloatingActionButton) parentView.findViewById(R.id.fab_activity);
 
         fabMulai.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,13 +80,6 @@ RecyclerView recyclerView;
                 }
             }
         });
-
-        mGoogleApiClient = new GoogleApiClient
-                .Builder(getContext())
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .build();
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
@@ -97,6 +97,8 @@ RecyclerView recyclerView;
         listHome.add(new ModelHome("A1","Sabuga","27 Mei 2016",80));
         listHome.add(new ModelHome("A1","Sabuga","27 Mei 2016",80));
     }
+
+
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {

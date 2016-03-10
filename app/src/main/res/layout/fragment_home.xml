@@ -23,7 +23,7 @@
         </LinearLayout>
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_add"
+            android:id="@+id/fab_activity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:background="@color/colorAccent"
@@ -31,6 +31,8 @@
             android:clickable="true"
             app:layout_anchor="@id/header_tempat"
             app:layout_anchorGravity="bottom|right|end"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp"
+            android:onClick="clickStart"/>
     </android.support.design.widget.CoordinatorLayout>
+
 </FrameLayout>
