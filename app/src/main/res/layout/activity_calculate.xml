@@ -1,13 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="id.or.codelabs.earthsavior.CalculateActivity">
+    <LinearLayout
+        android:id="@+id/container_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!-- Toolbar-->
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:local="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/toolbar"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                local:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                local:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/logo_in_toolbar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/logoeartsavior"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/title_toolbar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="20dp"
+                        android:text="EARTH SAVIOR"
+                        android:textColor="@color/textColorPrimary"
+                        />
 
-</RelativeLayout>
+                </LinearLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true">
+            <LinearLayout
+                android:id="@+id/linear_keterangan"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:background="@color/textColorSecondary"
+                android:layout_margin="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    >
+
+                    <!-- Item yang pertama -->
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/textColorPrimary"
+                        android:layout_margin="2dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/running"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="12 KM/Jam"
+                            android:gravity="center"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+
+                    <!-- Item yang kedua -->
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/textColorPrimary"
+                        android:layout_margin="2dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/running"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="12 KM/Jam"
+                            android:gravity="center"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    >
+                    <!-- Item yang pertama -->
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/textColorPrimary"
+                        android:layout_margin="2dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/running"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="12 KM/Jam"
+                            android:gravity="center"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+
+                    <!-- Item yang kedua -->
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/textColorPrimary"
+                        android:layout_margin="2dp">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/running"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="12 KM/Jam"
+                            android:gravity="center"
+                            android:textColor="@color/textColorBlack"
+                            android:textSize="15dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/button_stop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="Stop Running"
+                android:textColor="@color/textColorPrimary"
+                android:textStyle="bold"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="30dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

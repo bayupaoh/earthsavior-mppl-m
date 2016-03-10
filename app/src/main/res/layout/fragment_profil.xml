@@ -1,13 +1,89 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="id.or.codelabs.earthsavior.Fragment.ProfilFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@drawable/sampulprofil">
 
-</FrameLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar_profil"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/swipeicon1"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/text_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bayu Firmawan Paoh"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@id/avatar_profil"/>
+
+        <TextView
+            android:id="@+id/text_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="bayupaoh@mail.com"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@id/text_nama"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/text_email"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profil"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="120 Point"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/textColorPrimary"
+                android:layout_below="@id/text_nama"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/profil"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="120 Point"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/textColorPrimary"
+                android:layout_below="@id/text_nama"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_badges"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

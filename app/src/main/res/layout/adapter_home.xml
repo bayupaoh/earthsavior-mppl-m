@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+<ImageView
+    android:id="@+id/icon_activity"
+    android:layout_width="60dp"
+    android:layout_height="50dp"
+    android:layout_margin="10dp"
+    android:src="@drawable/running"/>
+<LinearLayout
+    android:layout_toRightOf="@id/icon_activity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/text_tempat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sabuga"
+        android:typeface="sans"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/textColorBlack"/>
+    <TextView
+        android:id="@+id/text_tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17 Mei 2016"
+        android:typeface="sans"
+        android:textSize="15dp"
+        android:textColor="@color/textColorBlack"/>
+    <TextView
+        android:id="@+id/text_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="150 Point"
+        android:typeface="sans"
+        android:textSize="15dp"
+        android:textColor="@color/textColorBlack"/>
+
+</LinearLayout>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/icon_detail"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

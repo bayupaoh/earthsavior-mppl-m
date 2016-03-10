@@ -12,10 +12,10 @@ import id.or.codelabs.earthsavior.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfilFragment extends Fragment {
+public class IntroSatuAplikasi extends Fragment {
 
 
-    public ProfilFragment() {
+    public IntroSatuAplikasi() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class ProfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profil, container, false);
+        return inflater.inflate(R.layout.fragment_intro_satu_aplikasi, container, false);
     }
 
 }

@@ -1,0 +1,13 @@
+<resources>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="app_name">Earth Savior</string>
+    <string name="menu1">Home</string>
+    <string name="menu2">Profil</string>
+    <string name="menu3">Chart</string>
+    <string name="menu4">Setting</string>
+    <string name="menu5">Log Out</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
