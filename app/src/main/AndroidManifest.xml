@@ -15,16 +15,20 @@
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-permission android:name="android.permission.INTERNET" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityLogin" />
-        <activity android:name=".IntroActivity" />
-        <activity android:name=".DahsboardActivity" />
+        <activity android:name=".ActivityLogin"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".IntroActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DahsboardActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -37,8 +41,10 @@
             android:glEsVersion="0x00020000"
             android:required="true" />
 
-        <activity android:name=".CalculateActivity" />
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".CalculateActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ResultActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

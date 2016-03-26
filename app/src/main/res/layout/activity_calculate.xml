@@ -99,9 +99,10 @@
                             android:layout_gravity="center"/>
 
                         <TextView
+                            android:id="@+id/txtViewWaktu"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="12 KM/Jam"
+                            android:text="-"
                             android:gravity="center"
                             android:textColor="@color/textColorBlack"
                             android:textSize="15dp"/>
@@ -122,9 +123,10 @@
                             android:layout_gravity="center"/>
 
                         <TextView
+                            android:id="@+id/txtViewKecepatan"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="12 KM/Jam"
+                            android:text="0.00 M/S"
                             android:gravity="center"
                             android:textColor="@color/textColorBlack"
                             android:textSize="15dp"/>
@@ -153,9 +155,10 @@
                             android:layout_gravity="center"/>
 
                         <TextView
+                            android:id="@+id/txtViewTotalJarak"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="12 KM/Jam"
+                            android:text="0.00 KM"
                             android:gravity="center"
                             android:textColor="@color/textColorBlack"
                             android:textSize="15dp"/>
@@ -176,9 +179,10 @@
                             android:layout_gravity="center"/>
 
                         <TextView
+                            android:id="@+id/txtViewEmisi"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="12 KM/Jam"
+                            android:text="0.000 KgCO2"
                             android:gravity="center"
                             android:textColor="@color/textColorBlack"
                             android:textSize="15dp"/>

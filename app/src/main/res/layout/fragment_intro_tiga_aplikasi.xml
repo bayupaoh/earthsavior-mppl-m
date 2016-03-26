@@ -33,7 +33,7 @@
             android:fontFamily="sans-serif-thin"
             android:textColor="#FFF"
             android:textSize="28dp"
-            android:text="WELCOME"
+            android:text="SHARE"
             android:layout_below="@id/gambar_intro"/>
         <TextView
             android:id="@+id/desc_intro"
@@ -46,7 +46,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="16sp"
-            android:text="Connecting, educate and share their hopes for a better life"/>
+            android:text="Bagikan point yang anda dapatkan ke social media untuk mempromosikan green life style"/>
 
     </RelativeLayout>
 

@@ -114,8 +114,13 @@ public class HomeFragment extends Fragment implements GoogleApiClient.OnConnecti
                 LatLng koordinat = place.getLatLng();
 
                 String toastMsg ="Place: "+ koordinat.latitude + " & "+koordinat.longitude;
-                Snackbar.make(getView(),toastMsg,Snackbar.LENGTH_LONG).show();
+
                 Intent intent = new Intent(getContext(), CalculateActivity.class);
+                Bundle b = new Bundle();
+                b.putDouble("latitude",koordinat.latitude);
+                b.putDouble("longitude",koordinat.longitude);
+
+                intent.putExtras(b);
                 startActivity(intent);
             }
         }
