@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_id": "earth-savior-1466a",
+    "project_number": "311400289237",
+    "name": "Earth Savior"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:311400289237:android:ce2555dd9beb48c8",
+        "client_id": "android:id.or.codelabs.earthsavior",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "id.or.codelabs.earthsavior",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "311400289237-rt18d0mmpj92v0jlaa3rr7ic7qsh4ge8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.or.codelabs.earthsavior",
+            "certificate_hash": "64F476243E3E6F3F7ABDC1FCAD3386C6C7D7A9D6"
+          }
+        },
+        {
+          "client_id": "311400289237-c8lppg2s9h0od7gjgq6qkd9pb258ro0t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
