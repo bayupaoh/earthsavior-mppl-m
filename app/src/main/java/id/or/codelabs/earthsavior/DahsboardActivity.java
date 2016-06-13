@@ -21,6 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
 
+import id.or.codelabs.earthsavior.Fragment.ChartFragment;
 import id.or.codelabs.earthsavior.Fragment.HomeFragment;
 import id.or.codelabs.earthsavior.Fragment.ProfilFragment;
 
@@ -81,12 +82,10 @@ public class DahsboardActivity extends AppCompatActivity implements GoogleApiCli
                     fragmentManager.beginTransaction().replace(R.id.container_body, new HomeFragment()).commit();
                     return true;
                 case R.id.id_menu_chart :
-
+                    fragmentManager.beginTransaction().replace(R.id.container_body, new ChartFragment()).commit();
                     return true;
                 case R.id.id_menu_profil :
                     fragmentManager.beginTransaction().replace(R.id.container_body, new ProfilFragment()).commit();
-                    return true;
-                case R.id.id_menu_setting:
                     return true;
                 case R.id.id_menu_logout :
                     revokeAccess();

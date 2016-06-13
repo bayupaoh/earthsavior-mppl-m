@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <TextView
+        android:id="@+id/txt_item_urutan"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="1"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textColor="@color/textColorBlack"
+        android:textStyle="bold"
+        android:layout_marginRight="10dp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_item_avatarChart"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/swipeicon1"
+        android:layout_marginRight="10dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/txt_item_namauser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bayu firmawan"
+                android:textSize="25dp"
+                android:textColor="@color/textColorBlack"
+                />
+            <TextView
+                android:id="@+id/txt_item_pointuser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="20 Point"
+                android:textSize="20dp"
+                />
+        </LinearLayout>
+</LinearLayout>

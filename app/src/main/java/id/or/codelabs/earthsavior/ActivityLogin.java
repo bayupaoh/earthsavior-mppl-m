@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -46,8 +47,8 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this,this)
+        mGoogleApiClient = new GoogleApiClient.Builder(ActivityLogin.this)
+                .enableAutoManage(ActivityLogin.this,ActivityLogin.this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
@@ -90,10 +91,10 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             String id = acct.getId();
 
 
-            Intent intentDashboard = new Intent(getApplicationContext(), DahsboardActivity.class);
+            Intent intentDashboard = new Intent(ActivityLogin.this, DahsboardActivity.class);
             startActivity(intentDashboard);
         } else {
-            Snackbar.make(getCurrentFocus(),"Login Gagal",Snackbar.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),result.getStatus().getStatusMessage(),Toast.LENGTH_LONG).show();
         }
     }
 }

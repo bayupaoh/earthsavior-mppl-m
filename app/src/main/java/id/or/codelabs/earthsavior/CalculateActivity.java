@@ -2,55 +2,39 @@ package id.or.codelabs.earthsavior;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationChangeListener;
+import com.google.android.gms.location.FusedLocationProviderApi;
 
 public class CalculateActivity extends AppCompatActivity
-        implements OnMapReadyCallback, android.location.LocationListener{
+        implements OnMapReadyCallback{
 
     Toolbar mToolbar;
     Button btnStop;
     private PolylineOptions mPolylineOptions;
-    GoogleMap googleMap;
     Location mCurrentLocation;
     Location mStartPosisition;
     Location mLocationBefore;
@@ -64,6 +48,8 @@ public class CalculateActivity extends AppCompatActivity
     float jarak = 0;
     float avgSpeed = 0;
 
+    GoogleMap googleMap;
+
     private long startTime = 0L;
     private Handler customHandler = new Handler();
 
@@ -72,6 +58,8 @@ public class CalculateActivity extends AppCompatActivity
     long updatedTime = 0L;
     int secs, mins, milliseconds, hour;
     double latTujuan,logTujuan;
+    MapFragment mapFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,30 +88,20 @@ public class CalculateActivity extends AppCompatActivity
         }
         declarationWidget();
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
+        mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
 
-        final LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        String bestProvider = locationManager.getBestProvider(criteria, true);
-        mStartPosisition = locationManager.getLastKnownLocation(bestProvider);
 
-        locationManager.requestLocationUpdates(bestProvider,1000,0,this);
+
 
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-                locationManager.removeUpdates(CalculateActivity.this);
                 Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
                 Bundle b = new Bundle();
                 b.putFloat("distance", jarak);
@@ -166,19 +144,7 @@ public class CalculateActivity extends AppCompatActivity
     };
 
     private void tandaitempat() {
-        LatLng asal = new LatLng(mStartPosisition.getLatitude(),mStartPosisition.getLongitude());
-        googleMap.addMarker(new MarkerOptions().position(asal).title("Start")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(latTujuan,logTujuan)).title("Finish")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(asal));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-
-        mLocationBefore = mStartPosisition;
-        cursor = googleMap.addMarker(new MarkerOptions().position(asal).title("Start")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.runningico)));
    }
 
 
@@ -195,54 +161,94 @@ public class CalculateActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        this.googleMap=googleMap;
+        Toast.makeText(getApplicationContext(),"Map Available",Toast.LENGTH_LONG).show();
+        this.googleMap = googleMap;
         this.googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-
         GoogleMapOptions option = new GoogleMapOptions();
         option.compassEnabled(true);
-        tandaitempat();
         this.googleMap.setTrafficEnabled(true);
+        this.googleMap.setMyLocationEnabled(true);
+        this.googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
     }
 
+    private OnMyLocationChangeListener myLocationChangeListener = new OnMyLocationChangeListener() {
+        @Override
+        public void onMyLocationChange(Location location) {
+            if(awal) {
+                awal=false;
+                LatLng asal = new LatLng(location.getLatitude(),location.getLongitude());
+                googleMap.addMarker(new MarkerOptions().position(asal).title("Start")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-    @Override
-    public void onLocationChanged(Location location) {
+                googleMap.addMarker(new MarkerOptions().position(new LatLng(latTujuan,logTujuan)).title("Finish")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-        LatLng latLngCurrent = new LatLng(location.getLatitude(),location.getLongitude());
-        LatLng latLngBefore = new LatLng(mLocationBefore.getLatitude(),mLocationBefore.getLongitude());
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(asal));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
-        piPolyline = googleMap.addPolyline(new PolylineOptions().add(latLngBefore,latLngCurrent).width(15).color(Color.GREEN));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLngCurrent));
+                mLocationBefore = location ;
+
+            }else{
+                LatLng latLngCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+                LatLng latLngBefore = new LatLng(mLocationBefore.getLatitude(), mLocationBefore.getLongitude());
+
+                piPolyline = googleMap.addPolyline(new PolylineOptions().add(latLngBefore, latLngCurrent).width(15).color(Color.GREEN));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLngCurrent));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+
+
+                jarak = jarak + mLocationBefore.distanceTo(location);
+                avgSpeed = (avgSpeed + location.getSpeed()) / 2;
+
+                txtTotalJarak.setText(String.valueOf(String.format("%.2f", jarak / 1000) + " KM"));
+                txtKecepatan.setText(String.valueOf(String.format("%.2f", location.getSpeed()) + " M/S"));
+                txtTotalEmisi.setText(String.valueOf(String.format("%.3f", 0.31 * (jarak / 1000)) + " KgCO2"));
+
+
+
+                mLocationBefore = location;
+            }
+        }
+    };
+
+    /*
+    public void tandaiTempat(){
+        awal=false;
+        LatLng asal = new LatLng(location.getLatitude(),location.getLongitude());
+        googleMap.addMarker(new MarkerOptions().position(asal).title("Start")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(latTujuan,logTujuan)).title("Finish")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(asal));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
-
-        jarak = jarak + mLocationBefore.distanceTo(location);
-        avgSpeed = (avgSpeed + location.getSpeed())/2;
-
-        txtTotalJarak.setText(String.valueOf(String.format("%.2f",jarak/1000)+" KM"));
-        txtKecepatan.setText(String.valueOf(String.format("%.2f",location.getSpeed())+" M/S"));
-        txtTotalEmisi.setText(String.valueOf(String.format("%.3f",0.31 * (jarak / 1000))+" KgCO2"));
-
-        cursor.setPosition(latLngCurrent);
-
-
-        mLocationBefore=location;
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
+        mLocationBefore = mStartPosisition;
+        cursor = googleMap.addMarker(new MarkerOptions().position(asal).title("Start")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.runningico)));
 
     }
 
 
+                LatLng latLngCurrent = new LatLng(location.getLatitude(), location.getLongitude());
+                LatLng latLngBefore = new LatLng(mLocationBefore.getLatitude(), mLocationBefore.getLongitude());
+
+                piPolyline = googleMap.addPolyline(new PolylineOptions().add(latLngBefore, latLngCurrent).width(15).color(Color.GREEN));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLngCurrent));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+
+
+                jarak = jarak + mLocationBefore.distanceTo(location);
+                avgSpeed = (avgSpeed + location.getSpeed()) / 2;
+
+                txtTotalJarak.setText(String.valueOf(String.format("%.2f", jarak / 1000) + " KM"));
+                txtKecepatan.setText(String.valueOf(String.format("%.2f", location.getSpeed()) + " M/S"));
+                txtTotalEmisi.setText(String.valueOf(String.format("%.3f", 0.31 * (jarak / 1000)) + " KgCO2"));
+
+                cursor.setPosition(latLngCurrent);
+
+
+                mLocationBefore = location;
+*/
 }
