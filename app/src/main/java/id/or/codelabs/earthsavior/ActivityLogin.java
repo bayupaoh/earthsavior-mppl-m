@@ -20,11 +20,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import id.or.codelabs.earthsavior.Utils.SessionManager;
+
 public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     SignInButton login;
     GoogleApiClient mGoogleApiClient;
     final int RC_SIGN_IN =0;
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -89,8 +93,11 @@ public class ActivityLogin extends AppCompatActivity implements GoogleApiClient.
             String nama = acct.getDisplayName();
             String email = acct.getEmail();
             String id = acct.getId();
+            String foto = String.valueOf(acct.getPhotoUrl());
+            int point=100;
 
-
+            sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.createLoginSession(id,nama,email,foto,100);
             Intent intentDashboard = new Intent(ActivityLogin.this, DahsboardActivity.class);
             startActivity(intentDashboard);
         } else {

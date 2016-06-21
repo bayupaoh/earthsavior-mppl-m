@@ -6,10 +6,12 @@ package id.or.codelabs.earthsavior.Model;
 public class ModelBadges {
     private int imgBadges;
     private String nameReward;
+    private String descReward;
 
-    public ModelBadges(int imgBadges, String nameReward) {
+    public ModelBadges(int imgBadges, String nameReward, String descReward) {
         this.imgBadges = imgBadges;
         this.nameReward = nameReward;
+        this.descReward = descReward;
     }
 
     public int getImgBadges() {
@@ -28,5 +30,11 @@ public class ModelBadges {
         this.nameReward = nameReward;
     }
 
+    public String getDescReward() {
+        return descReward;
+    }
 
+    public void setDescReward(String descReward) {
+        this.descReward = descReward;
+    }
 }

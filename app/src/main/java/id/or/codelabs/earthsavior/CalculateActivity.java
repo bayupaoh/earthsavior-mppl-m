@@ -184,7 +184,7 @@ public class CalculateActivity extends AppCompatActivity
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(asal));
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(19));
 
                 mLocationBefore = location ;
 
@@ -194,7 +194,7 @@ public class CalculateActivity extends AppCompatActivity
 
                 piPolyline = googleMap.addPolyline(new PolylineOptions().add(latLngBefore, latLngCurrent).width(15).color(Color.GREEN));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLngCurrent));
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+                googleMap.animateCamera(CameraUpdateFactory.zoomTo(19));
 
 
                 jarak = jarak + mLocationBefore.distanceTo(location);
@@ -203,8 +203,6 @@ public class CalculateActivity extends AppCompatActivity
                 txtTotalJarak.setText(String.valueOf(String.format("%.2f", jarak / 1000) + " KM"));
                 txtKecepatan.setText(String.valueOf(String.format("%.2f", location.getSpeed()) + " M/S"));
                 txtTotalEmisi.setText(String.valueOf(String.format("%.3f", 0.31 * (jarak / 1000)) + " KgCO2"));
-
-
 
                 mLocationBefore = location;
             }

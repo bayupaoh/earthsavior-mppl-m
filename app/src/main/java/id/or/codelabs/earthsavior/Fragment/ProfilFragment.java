@@ -53,9 +53,13 @@ public class ProfilFragment extends Fragment {
     }
 
     private void setupBadges() {
-        listBadges.add(new ModelBadges(R.drawable.profil,"Reward berhasi"));
-        listBadges.add(new ModelBadges(R.drawable.profil,"Reward berhasi"));
-        listBadges.add(new ModelBadges(R.drawable.profil,"Reward berhasi"));
+        listBadges.add(new ModelBadges(R.drawable.medal1,"Point 1000","Reward untuk point diatas 1000"));
+        listBadges.add(new ModelBadges(R.drawable.medal2,"Jarak 50 KM","Total jarak lebih dari 50 KM"));
+        listBadges.add(new ModelBadges(R.drawable.medal3,"Posisi 1","Reward posisi pertama"));
+        listBadges.add(new ModelBadges(R.drawable.medal_black,"Reward Terkunci","Reward masih terkunci"));
+        listBadges.add(new ModelBadges(R.drawable.medal_black,"Reward Terkunci","Reward masih terkunci"));
+        listBadges.add(new ModelBadges(R.drawable.medal_black,"Reward Terkunci","Reward masih terkunci"));
+        listBadges.add(new ModelBadges(R.drawable.medal_black,"Reward Terkunci","Reward masih terkunci"));
     }
 
 }

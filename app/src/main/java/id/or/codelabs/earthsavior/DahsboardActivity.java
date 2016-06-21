@@ -1,6 +1,7 @@
 package id.or.codelabs.earthsavior;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -11,8 +12,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -20,21 +25,34 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallbacks;
 import com.google.android.gms.common.api.Status;
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 import id.or.codelabs.earthsavior.Fragment.ChartFragment;
 import id.or.codelabs.earthsavior.Fragment.HomeFragment;
 import id.or.codelabs.earthsavior.Fragment.ProfilFragment;
+import id.or.codelabs.earthsavior.Utils.SessionManager;
 
 public class DahsboardActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     DrawerLayout drawer;
     NavigationView navigationView;
     Toolbar mToolbar;
     GoogleApiClient mGoogleApiClient;
+    SessionManager sessionManager;
+    String email,foto,nama;
+    TextView txtNama;
+    TextView txtEmail;
+    ImageView imgAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dahsboard);
+
+        txtNama = (TextView) findViewById(R.id.text_header_nama);
+        txtEmail = (TextView) findViewById(R.id.text_header_email);
+        imgAvatar = (ImageView) findViewById(R.id.imageview_header_avatar);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -55,6 +73,9 @@ public class DahsboardActivity extends AppCompatActivity implements GoogleApiCli
 
         navigationView = (NavigationView) findViewById(R.id.fragment_navigation_drawer);
         navigationView.setNavigationItemSelectedListener(navItemSelect);
+
+        setSessionManager();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
@@ -68,6 +89,20 @@ public class DahsboardActivity extends AppCompatActivity implements GoogleApiCli
 
         fragmentManager.beginTransaction().replace(R.id.container_body, new HomeFragment()).commit();
 
+    }
+
+    private void setSessionManager() {
+        sessionManager = new SessionManager(getApplicationContext());
+        sessionManager.checkLogin();
+
+        HashMap<String, String> user = sessionManager.getUserDetails();
+        nama = user.get(SessionManager.KEY_NAMAUSER);
+        email = user.get(SessionManager.KEY_EMAILUSER);
+        foto = user.get(SessionManager.KEY_FOTOUSER);
+
+        txtNama.setText(nama);
+        txtEmail.setText(email);
+        Picasso.with(getApplicationContext()).load(foto).into(imgAvatar);
     }
 
     NavigationView.OnNavigationItemSelectedListener navItemSelect = new NavigationView.OnNavigationItemSelectedListener() {
@@ -100,6 +135,7 @@ public class DahsboardActivity extends AppCompatActivity implements GoogleApiCli
         Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(new ResultCallbacks<Status>() {
             @Override
             public void onSuccess(@NonNull Status status) {
+                sessionManager.logoutUser();
                 finish();
                 Intent intentLogin = new Intent(DahsboardActivity.this, ActivityLogin.class);
                 startActivity(intentLogin);
@@ -107,7 +143,7 @@ public class DahsboardActivity extends AppCompatActivity implements GoogleApiCli
 
             @Override
             public void onFailure(@NonNull Status status) {
-                Snackbar.make(getCurrentFocus(),"LOG OUT GAGAL",Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getCurrentFocus(),"LOG OUT GAGAL. Pesan : "+status.getStatusMessage(),Snackbar.LENGTH_LONG).show();
             }
         });
     }

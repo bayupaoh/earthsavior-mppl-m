@@ -50,7 +50,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profil"/>
+                android:src="@drawable/point"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -64,12 +64,12 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profil"
+                android:src="@drawable/point"
                 android:layout_marginLeft="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="120 Point"
+                android:text="Posisi 1"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
