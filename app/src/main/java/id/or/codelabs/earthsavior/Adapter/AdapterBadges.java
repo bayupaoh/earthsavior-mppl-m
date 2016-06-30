@@ -38,6 +38,7 @@ public class AdapterBadges extends RecyclerView.Adapter<AdapterBadges.ViewHolder
     public void onBindViewHolder(ViewHolderBadges holder, int position) {
         holder.imgBadges.setImageResource(listBadges.get(position).getImgBadges());
         holder.txtBadges.setText(listBadges.get(position).getNameReward());
+        holder.txtDesc.setText(listBadges.get(position).getDescReward());
     }
 
     @Override
@@ -49,11 +50,13 @@ public class AdapterBadges extends RecyclerView.Adapter<AdapterBadges.ViewHolder
 
         ImageView imgBadges;
         TextView txtBadges;
+        TextView txtDesc;
 
         public ViewHolderBadges(View itemView) {
             super(itemView);
             imgBadges = (ImageView) itemView.findViewById(R.id.img_badges);
             txtBadges = (TextView) itemView.findViewById(R.id.text_badges);
+            txtDesc = (TextView) itemView.findViewById(R.id.text_adapter_desc);
         }
 
     }

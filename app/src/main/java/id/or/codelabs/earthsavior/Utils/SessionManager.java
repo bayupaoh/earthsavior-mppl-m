@@ -18,15 +18,15 @@ public class SessionManager {
 
     private Context mContext;
 
-    private static final String PREF_NAME = "ShoutcapPref";
-
+    private static final String PREF_NAME = "EarthSaviorPref";
     private static final String IS_LOGIN = "IsLoggedIn";
-
     public static final String KEY_IDUSER = "iduser";
-
     public static final String KEY_NAMAUSER = "namauser";
-
     public static final String KEY_EMAILUSER = "emailuser";
+    public static final String KEY_FOTOUSER = "fotouser";
+    public static final String KEY_POINTUSER = "pointuser";
+
+
 
     public SessionManager(Context context) {
         mContext = context;
@@ -34,21 +34,25 @@ public class SessionManager {
         editor = pref.edit();
     }
 
-    public void createLoginSession(String idUser, String nama, String email) {
+    public void createLoginSession(String idUser, String nama, String email,String foto,int point) {
 
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_IDUSER, idUser);
-        editor.putString(KEY_IDUSER, nama);
-        editor.putString(KEY_IDUSER, email);
+        editor.putString(KEY_NAMAUSER, nama);
+        editor.putString(KEY_EMAILUSER, email);
+        editor.putString(KEY_FOTOUSER, foto);
+        editor.putString(KEY_POINTUSER, String.valueOf(point));
         editor.commit();
     }
 
-    public void addProfile(String idUser, String nama, String email) {
+    public void addProfile(String idUser, String nama, String email,String foto,int point) {
 
 
         editor.putString(KEY_IDUSER,idUser);
         editor.putString(KEY_NAMAUSER,nama);
         editor.putString(KEY_EMAILUSER,email);
+        editor.putString(KEY_FOTOUSER,foto);
+        editor.putString(KEY_POINTUSER,String.valueOf(point));
         editor.commit();
     }
 
@@ -72,11 +76,25 @@ public class SessionManager {
         user.put(KEY_IDUSER, pref.getString(KEY_IDUSER, null));
         user.put(KEY_EMAILUSER, pref.getString(KEY_EMAILUSER, null));
         user.put(KEY_NAMAUSER, pref.getString(KEY_NAMAUSER, null));
-
+        user.put(KEY_FOTOUSER, pref.getString(KEY_FOTOUSER, null));
+        user.put(KEY_POINTUSER, pref.getString(KEY_POINTUSER, null));
         return user;
     }
 
     public boolean isLoggedIn() {
         return pref.getBoolean(IS_LOGIN, false);
+    }
+
+    public void checkLogin(){
+
+        if(!this.isLoggedIn()){
+
+            Intent i = new Intent(mContext, ActivityLogin.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            mContext.startActivity(i);
+        }
+
     }
 }

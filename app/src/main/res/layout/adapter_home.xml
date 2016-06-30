@@ -41,11 +41,4 @@
         android:textColor="@color/textColorBlack"/>
 
 </LinearLayout>
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/icon_detail"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"/>
 </RelativeLayout>
